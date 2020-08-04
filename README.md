@@ -1,4 +1,4 @@
-# E-book
+# Online Book Store
 Project re-selling books
 
 The e-books platform web application has been created to bring together more than one publishing house worldwide to save time and effort when searching for a specific book.
