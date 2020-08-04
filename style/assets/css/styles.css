@@ -1,0 +1,77 @@
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+header {
+  /* The image used */
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url(../imgs/cover1-9.jpg);
+}
+
+/*Globals*/
+
+*{
+  -webkit-box-sizing:border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing:border-box;
+}
+.cover{
+  -webkit-background-size:cover !important;
+  -moz-background-size:cover !important;
+  -o-background-size:cover !important;
+  background-size:cover !important;
+}
+
+.darken {
+  background: rgba(3,3,3,0.4);
+  height: 100%;
+  min-height:inherit;
+  z-index: 999;
+}
+
+/* header */
+/*header{
+  background: url(../imgs/cover1-9.jpg) no-repeat;
+  background-position: center center;
+}*/
+a,
+a:hover,
+a:active,
+a:visited{
+  text-decoration: none;
+}
+
+.myrow{
+  border: 2px solid red;
+}
+
+
+.mycol1{
+  border: 2px solid purple;
+}
+
+.mycol2{
+  border:2px solid cyan;
+}
+
+.mycol3{
+  border: 2px solid yellow;
+}
+.mycontainer{
+  border: 2px solid orange;
+}
+
+
+.re-img{
+  width: 300px;
+  height: 200px;
+}

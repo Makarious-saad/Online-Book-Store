@@ -1,0 +1,62 @@
+
+#success {
+  color: green;
+  display: none;
+}
+
+#error {
+  color: red;
+  display: none;
+}
+#warning {
+  color: red;
+  display: none;
+}
+
+span#span1 {
+  font-size: 13px;
+  margin-left: 45px;
+  margin-top: 5px;
+  color: red;
+  font-weight: bold;
+  display: none;
+}
+
+span#span2 {
+  font-size: 13px;
+  position: absolute;
+  padding-top: 5px;
+  padding-left: 45px;
+  left: 0px;
+  color: red;
+  font-weight: bold;
+  display: none;
+}
+.emailentry h3{
+  margin-bottom: 30px;
+}
+.emailentry form input [type="email"]:focus{
+  border: 1px solid black;
+  box-shadow: .04em .04em 12px 0 darkblue;
+}
+/* To view Containers/Flexes*/
+
+.myrow{
+  border: 2px solid red;
+}
+
+
+.mycol1{
+  border: 2px solid purple;
+}
+
+.mycol2{
+  border:2px solid cyan;
+}
+
+.mycol3{
+  border: 2px solid yellow;
+}
+.mycontainer{
+  border: 2px solid orange;
+}
