@@ -33,31 +33,24 @@ if (isset($_POST['payment_user'])) {
     // [Paid] - [NoPayment] - [OrderIsPaid] - [PriceLow]
 
     if($checkPayment['status'] == 'Paid'){
-      $row = mysqli_fetch_array($results);
-      $amount = $row['amount'] - $price ;
-      mysqli_query ($db, "UPDATE payment SET amount = ".$amount." WHERE user_code = ".$user);
-      echo 'You are now pay';
+      @header("Location: /fawry/?status=Paid");
     }elseif($checkPayment['status'] == 'NoPayment'){
-      echo "The payment code appears to be incorrect";
+      @header("Location: /fawry/?status=NoPayment");
     }elseif($checkPayment['status'] == 'AmountIncorrect'){
-      echo "The amount sent is incorrect";
+      @header("Location: /fawry/?status=AmountIncorrect");
     }elseif($checkPayment['status'] == 'PriceLow'){
-      echo "The price you will pay is less than required";
+      @header("Location: /fawry/?status=PriceLow");
     }elseif($checkPayment['status'] == 'ErrorServiceProvider'){
-      echo "Error in calling service provider";
+      @header("Location: /fawry/?status=ErrorServiceProvider");
     }else{
-      echo "Payment error";
+      @header("Location: /fawry/?status=Error");
     }
 
   }else{
-
-    echo "You don't have money";
-
+    @header("Location: /fawry/?status=NoMoney");
   }
 
 }else{
-
-  echo 'Error';
-
+  @header("Location: /fawry/?status=DataIncomplete");
 }
 ?>
