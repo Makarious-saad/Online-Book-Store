@@ -14,7 +14,6 @@
 						<li class="nav-item" role="presentation"><a class="nav-link" href="./categories"><i class="fas fa-align-justify"></i><span>Categories</span></a></li>
 						<li class="nav-item" role="presentation"><a class="nav-link" href="./books"><i class="fas fa-book"></i><span>Books</span></a></li>
 						<li class="nav-item" role="presentation"><a class="nav-link" href="./users"><i class="fas fa-users"></i><span>Users</span></a></li>
-						<li class="nav-item" role="presentation"><a class="nav-link" href="./managers"><i class="fas fa-user-shield"></i><span>Managers</span></a></li>
 						<li class="nav-item" role="presentation"><a class="nav-link" href="./orders"><i class="fas fa-user-shield"></i><span>Orders</span></a></li>
 						<li class="nav-item" role="presentation"><a class="nav-link" href="./resale"><i class="fas fa-user-shield"></i><span>Resale</span></a></li>
 				</ul>

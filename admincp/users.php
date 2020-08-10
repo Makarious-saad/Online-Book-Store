@@ -11,8 +11,6 @@
         $systemData->swal('Error!','The user has not been added','error');
       }elseif(@$_GET['error'] == 'update'){
         $systemData->swal('Error!','The user has not been updated','error');
-      }if(@$_GET['success'] == 'add'){
-        $systemData->swal('Good','The user has been added successfully','success');
       }elseif(@$_GET['success'] == 'update'){
         $systemData->swal('Good','The user was successfully updated','success');
       } ?>
@@ -34,9 +32,6 @@
             <div class="container-fluid">
                 <h3 class="text-dark mb-4"><strong>View Users</strong></h3>
                 <div class="card shadow">
-                    <div class="card-header py-3">
-                      <a class="btn btn-info float-right" role="button" href="/admincp/new-user">Add new user</a>
-                    </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6 text-nowrap">
