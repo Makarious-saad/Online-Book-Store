@@ -50,6 +50,8 @@ $book = $this->preparedQuery("SELECT books.id,books.title,books.description,book
 
                 </div>
                 <div class="col-6">
+                  <?php $user = $this->preparedQuery("SELECT * FROM users WHERE email=?",array($_SESSION['login']),'select_row');
+                           if($user['type'] == 'buyer'){ ?>
                   <div class="row m-2">
                     <div class="col-2">
                       <input type="text" name="quantity" id="<?php echo 'quantity'.$book["id"]; ?>" class="form-control" value="1" />
@@ -58,13 +60,16 @@ $book = $this->preparedQuery("SELECT books.id,books.title,books.description,book
                       <button type="button" name="add_to_cart" idproduct="<?php echo $book["id"]; ?>" id="<?php echo 'add_to_cart'.$book["id"]; ?>" class="btn btn-success form-control add_to_cart">Add to Cart</button>
                     </div>
                   </div>
+                <?php } ?>
                 </div>
                 <div class="col-6">
+                  <?php if(isset($_SESSION['login'])){ ?>
                   <div class="row float-right m-2">
                     <div class="col-12">
                       <button type="button" idproduct="<?php echo $book['id']; ?>" id="add_to_favorites" class="btn btn-primary form-control">Add to favorites</button>
                     </div>
                   </div>
+                  <?php } ?>
                 </div>
               </div>
               <input type="hidden" id="<?php echo 'name'.$book['id']; ?>" value="<?php echo $book["title"]; ?>" />

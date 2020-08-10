@@ -10,7 +10,7 @@
   <div class="col-7" >
     <div class="emailentry">
 
-      <h3 class="text-white display-5">Old book</h3>
+      <h3 class="text-white display-5">Select Book From store</h3>
       <form action="/include/check.php" method="post" enctype="multipart/form-data">
         <div class="container text-center mt-2 mx-auto">
 
@@ -18,7 +18,7 @@
             <!-- Search Bar -->
             <div class="col-8">
               <div class="searchbooks">
-                  <div class="row">
+                  <div class="row" style="margin-bottom: 2%;">
                     <div class="col-12">
                       <select class="form-control" name="isbn" required>
                         <option selected disabled>Select Book</option>
@@ -27,6 +27,18 @@
                                 echo '<option value="'.$row['id'].'">#'.$row['id'].' - '.$row['title'].'</option>';
                               } ?>
                       </select>
+                    </div>
+                  </div>
+                  <div class="row" style="margin-bottom: 2%;">
+                    <div class="col-6">
+                      <select class="form-control" name="status" required>
+                        <option selected disabled>Select Status</option>
+                        <option value="new">New</option>
+                        <option value="old">Old</option>
+                      </select>
+                    </div>
+                    <div class="col-6">
+                      <input type="number" class="mb-1 form-control" placeholder="Price" name="price" required>
                     </div>
                   </div>
               </div>

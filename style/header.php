@@ -54,7 +54,7 @@
             </ul>
 
         <?php $user = $this->preparedQuery("SELECT * FROM users WHERE email=?",array($_SESSION['login']),'select_row');
-                 if($user['account_type'] == 'user'){ ?>
+                 if($user['type'] == 'buyer'){ ?>
               <nav class="navbar navbar-default" role="navigation">
                 <div class="container-fluid">
                  <div id="navbar-cart" class="navbar-collapse collapse">

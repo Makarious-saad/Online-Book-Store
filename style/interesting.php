@@ -101,7 +101,7 @@ $interesting = json_decode($interesting, true); ?>
           </div>
         </div>
         <div class="row justify-content-center">
-          <input class="btn btn-outline-light" type="submit" name="interesting" value="Complete Registertaion">
+          <input class="btn btn-outline-light" type="submit" name="interesting" value="Save">
         </div>
       </div>
     </form>
