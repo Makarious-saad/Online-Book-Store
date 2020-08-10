@@ -895,7 +895,7 @@ if (isset($_POST['order-now'])) {
 // Resale new book
 if (isset($_POST['resale-new'])) {
   // Filter input
-  $arr = $check->xss_clean_arr(array('isbn','title','cover','category','author','publisher','released','price','description'),'post');
+  $arr = $check->xss_clean_arr(array('isbn','title','cover','category','author','publisher','released','status','price','description'),'post');
 
   if($arr['isbn'] == NULL || $arr['title'] == NULL || $arr['author'] == NULL || $arr['category'] == NULL || $arr['publisher'] == NULL || $arr['released'] == NULL || $arr['price'] == NULL || $arr['description'] == NULL){
 
@@ -915,7 +915,7 @@ if (isset($_POST['resale-new'])) {
       // Insert
       $_SESSION["bookID"] = $check->preparedQuery("INSERT INTO books (isbn,category_id,author_id,publisher_id,user_id,title,description,released,qty,price,book_type,cover_image,status,created_at)
                               VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-                              array($arr['isbn'],$arr['category'],$arr['author'],$arr['publisher'],$_SESSION['UserID'],$arr['title'],$arr['description'],$arr['released'],1,$arr['price'],'new',$cover,'pending',date("Y-m-d H:i:s")), 'insert');
+                              array($arr['isbn'],$arr['category'],$arr['author'],$arr['publisher'],$_SESSION['UserID'],$arr['title'],$arr['description'],$arr['released'],1,$arr['price'],$arr['status'],$cover,'pending',date("Y-m-d H:i:s")), 'insert');
 
       // New SESSION
       $_SESSION["shopping_cart"] = 'resale';
@@ -940,7 +940,7 @@ if (isset($_POST['resale-new'])) {
 // Resale old book
 if (isset($_POST['resale-old'])) {
   // Filter input
-  $arr = $check->xss_clean_arr(array('isbn'),'post');
+  $arr = $check->xss_clean_arr(array('isbn','status','price'),'post');
 
   if($arr['isbn'] == NULL ){
 
@@ -956,7 +956,7 @@ if (isset($_POST['resale-old'])) {
     // Insert book
     $_SESSION["bookID"] = $check->preparedQuery("INSERT INTO books (isbn,category_id,author_id,publisher_id,user_id,title,description,released,qty,book_type,price,cover_image,status,created_at)
                             VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-                            array($book['isbn'],$book['category_id'],$book['author_id'],$book['publisher_id'],$_SESSION['UserID'],$book['title'],$book['description'],$book['released'],1,'old',$book['price'],$book['cover_image'],'pending',date("Y-m-d H:i:s")), 'insert');
+                            array($book['isbn'],$book['category_id'],$book['author_id'],$book['publisher_id'],$_SESSION['UserID'],$book['title'],$book['description'],$book['released'],1,$arr['status'],$arr['price'],$book['cover_image'],'pending',date("Y-m-d H:i:s")), 'insert');
 
     // New SESSION
     $_SESSION["shopping_cart"] = 'resale';

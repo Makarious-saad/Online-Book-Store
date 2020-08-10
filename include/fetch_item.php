@@ -19,8 +19,10 @@ while ($row = $result->fetch_array()){
               <img src="upload/'.$row["cover_image"].'" class="img-responsive" style="width: 60%;border-radius: 15px;" />
              </a><br><br>
              <h6 class="text-info"><a href="book&bookid='.$row["id"].'">'.$row["title"].'</a></h6>
-             <h6 class="text-danger">Price: '.$row["price"] .' EGP</h6>
-             <div class="row">
+             <h6 class="text-danger">Price: '.$row["price"] .' EGP</h6>';
+    @$user = $check->preparedQuery("SELECT * FROM users WHERE email=?",array($_SESSION['login']),'select_row');
+      if(isset($_SESSION['login']) && $user['type'] == 'buyer'){
+        $output .= '<div class="row">
               <div class="col-md-4">
                 <input type="text" name="quantity" id="quantity' . $row["id"] .'" class="form-control" value="1" />
               </div>
@@ -29,8 +31,9 @@ while ($row = $result->fetch_array()){
               </div>
              </div>
              <input type="hidden" name="hidden_name" id="name'.$row["id"].'" value="'.$row["title"].'" />
-             <input type="hidden" name="hidden_price" id="price'.$row["id"].'" value="'.$row["price"].'" />
-          </div>
+             <input type="hidden" name="hidden_price" id="price'.$row["id"].'" value="'.$row["price"].'" />';
+        }
+  $output .= '</div>
         </div>
   ';
  }
