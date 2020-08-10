@@ -15,8 +15,6 @@
         $systemData->swal('Good','The user has been added successfully','success');
       }elseif(@$_GET['success'] == 'update'){
         $systemData->swal('Good','The user was successfully updated','success');
-      }elseif(@$_GET['success'] == 'delete'){
-        $systemData->swal('Good','The user has been deleted successfully','success');
       } ?>
 
 <body id="page-top">
@@ -59,7 +57,6 @@
                                         <th class="text-center">Phone</th>
                                         <th class="text-center">Type</th>
                                         <th class="text-center">Edit User</th>
-                                        <th class="text-center">Delete User</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -75,7 +72,6 @@
                                         <td class="text-center"><?php echo $row['phone']; ?></td>
                                         <td class="text-center"><?php echo $row['type']; ?></td>
                                         <td class="text-center"><a class="btn btn-success" role="button" href="edit-user?id=<?php echo $row['id']; ?>">Edit</a></td>
-                                        <td class="text-center"><a class="btn btn-danger" role="button" href="../include/check.php?user=<?php echo $row['id']; ?>">Delete</a></td>
                                     </tr>
 
                             <?php } ?>

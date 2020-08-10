@@ -26,7 +26,7 @@
               <div class="Push-20"></div>
 
               <div class="row">
-                <div class="col-2">
+                <div class="col-3">
                   <div class="card">
                     <div class="card-body">
                       <label>#ISBN</label>
@@ -36,22 +36,12 @@
                   </div>
                 </div>
 
-                <div class="col-3">
+                <div class="col-5">
                   <div class="card">
                     <div class="card-body">
                       <label>Title</label>
                       <div class="Push-20"></div>
                       <input type="text" name="title" class="border rounded-0 form-control-lg" required style="width: 100%;" placeholder="Title Book">
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-3">
-                  <div class="card">
-                    <div class="card-body">
-                      <label>PDF</label>
-                      <div class="Push-20"></div>
-                      <input type="text" name="pdf" class="border rounded-0 form-control-lg" style="width: 100%;" placeholder="PDF">
                     </div>
                   </div>
                 </div>
@@ -67,8 +57,8 @@
                 </div>
               </div>
 
-              <div class="row mt-2">
-                <div class="col-2">
+              <div class="row mt-4">
+                <div class="col-4">
                   <div class="card">
                     <div class="card-body">
                       <label>Category</label>
@@ -88,7 +78,7 @@
                   </div>
                 </div>
 
-                <div class="col-2">
+                <div class="col-4">
                   <div class="card">
                     <div class="card-body">
                       <label>Author</label>
@@ -108,7 +98,7 @@
                   </div>
                 </div>
 
-                <div class="col-2">
+                <div class="col-4">
                   <div class="card">
                     <div class="card-body">
                       <label>Publisher</label>
@@ -128,7 +118,7 @@
                   </div>
                 </div>
 
-                <div class="col-2">
+                <div class="col-4">
                   <div class="card">
                     <div class="card-body">
                       <label>Released</label>
@@ -138,7 +128,7 @@
                   </div>
                 </div>
 
-                <div class="col-2">
+                <div class="col-4">
                   <div class="card">
                     <div class="card-body">
                       <label>QTY</label>
@@ -148,7 +138,7 @@
                   </div>
                 </div>
 
-                <div class="col-2">
+                <div class="col-4">
                   <div class="card">
                     <div class="card-body">
                       <label>Price</label>

@@ -15,9 +15,7 @@
         $systemData->swal('Good','The manger has been added successfully','success');
       }elseif(@$_GET['success'] == 'update'){
         $systemData->swal('Good','The manger was successfully updated','success');
-      }elseif(@$_GET['success'] == 'delete'){
-        $systemData->swal('Good','The manger has been deleted successfully','success');
-      } ?>
+      }?>
 
 <body id="page-top">
   <div id="wrapper">
@@ -58,7 +56,6 @@
                                         <th class="text-center">Email</th>
                                         <th class="text-center">Phone</th>
                                         <th class="text-center">Edit User</th>
-                                        <th class="text-center">Delete User</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -73,11 +70,6 @@
                                         <td class="text-center"><?php echo $row['email']; ?></td>
                                         <td class="text-center"><?php echo $row['phone']; ?></td>
                                         <td class="text-center"><a class="btn btn-success" role="button" href="edit-manger?id=<?php echo $row['id']; ?>">Edit</a></td>
-                                        <td class="text-center">
-                                          <?php if($row['id'] !== 1){ ?>
-                                            <td class="text-center"><a class="btn btn-danger" role="button" href="../include/check.php?admin=<?php echo $row['id']; ?>">Delete</a></td>
-                                          <?php } ?>
-                                        </td>
                                     </tr>
 
                             <?php } ?>
