@@ -582,34 +582,6 @@ if (isset($_GET['book'])) {
 
 
 
-// User
-if (isset($_POST['new-user'])) {
-  // Filter input
-  $arr = $check->xss_clean_arr(array('first_name','last_name','email','password','phone','type'),'post');
-
-  if($arr['first_name'] == NULL || $arr['last_name'] == NULL || $arr['email'] == NULL || $arr['password'] == NULL || $arr['phone'] == NULL || $arr['type'] == NULL){
-
-    // Redirection
-    @header("Location: /admincp/users?error=add");
-    exit();
-
-  }else{
-    // Password encryption
-    $password = md5($arr['password']);
-
-    // Insert
-    $check->preparedQuery("INSERT INTO users (first_name,last_name,email,password,phone,account_type,type,created_at)
-      VALUES (?,?,?,?,?,?,?,?)",array($arr['first_name'],$arr['last_name'],$arr['email'],$password,$arr['phone'],'user',$arr['type'],date("Y-m-d H:i:s")));
-
-    // Redirection
-    @header("Location: /admincp/users?success=add");
-    exit();
-
-  }
-}
-
-
-
 // Edit User
 if (isset($_POST['edit-user'])) {
   // Filter input
@@ -641,49 +613,6 @@ if (isset($_POST['edit-user'])) {
 
     // Redirection
     @header("Location: /admincp/users?success=update");
-    exit();
-
-  }
-}
-
-
-
-// Delete User
-if (isset($_GET['user'])) {
-  // ID
-  $id = intval($_GET['user']);
-
-  // Update
-  $check->preparedQuery("DELETE FROM users WHERE users.id=?",array($id));
-
-  // Redirection
-  @header("Location: /admincp/users?success=delete");
-  exit();
-}
-
-
-
-// Admin
-if (isset($_POST['new-admin'])) {
-  // Filter input
-  $arr = $check->xss_clean_arr(array('first_name','last_name','email','password','phone'),'post');
-
-  if($arr['first_name'] == NULL || $arr['last_name'] == NULL || $arr['email'] == NULL || $arr['password'] == NULL || $arr['phone'] == NULL){
-
-    // Redirection
-    @header("Location: /admincp/managers?error=add");
-    exit();
-
-  }else{
-    // Password encryption
-    $password = md5($arr['password']);
-
-    // Insert
-    $check->preparedQuery("INSERT INTO users (first_name,last_name,email,password,phone,account_type,created_at)
-      VALUES (?,?,?,?,?,?,?)",array($arr['first_name'],$arr['last_name'],$arr['email'],$password,$arr['phone'],'admin',date("Y-m-d H:i:s")));
-
-    // Redirection
-    @header("Location: /admincp/managers?success=add");
     exit();
 
   }
@@ -726,21 +655,6 @@ if (isset($_POST['edit-admin'])) {
     exit();
 
   }
-}
-
-
-
-// Delete Admin
-if (isset($_GET['admin'])) {
-  // ID
-  $id = intval($_GET['admin']);
-
-  // Update
-  $check->preparedQuery("DELETE FROM users WHERE id=?",array($id));
-
-  // Redirection
-  @header("Location: /admincp/managers?success=delete");
-  exit();
 }
 
 
