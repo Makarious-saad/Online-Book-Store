@@ -1,0 +1,12 @@
+RewriteEngine on
+DirectoryIndex index.php index.htm index.html
+RewriteCond %{THE_REQUEST} ^.*/index\.php
+RewriteRule ^(.*)index.php$ /$1&$2 [R=301,L]
+RewriteRule ^(fawry)($|/) - [L,QSA]
+RewriteRule ^b/(.*)/?$ index.php?page=book&id=$1&$2 [L,QSA]
+RewriteRule ^(.*)\&(.*)&(.*)/?$ index.php?page=page&id=$1&$2&$3 [L,QSA]
+RewriteRule ^(.*)\&(.*)/?$ index.php?page=page&id=$1&$2 [L,QSA]
+RewriteRule ^([^/.]+)/?$ index.php?page=page&id=$1 [L,QSA]
+RewriteRule ^admincp/([^/.]+)/?$ admincp/page.php?page=$1 [L,QSA]
+################################# Security ###############################################
+Options -Indexes
