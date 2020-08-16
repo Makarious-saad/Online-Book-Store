@@ -567,21 +567,6 @@ if (isset($_POST['edit-book'])) {
 
 
 
-// Delete Book
-if (isset($_GET['book'])) {
-  // ID
-  $id = intval($_GET['book']);
-
-  // Update
-  $check->preparedQuery("DELETE FROM books WHERE books.id=?",array($id));
-
-  // Redirection
-  @header("Location: /admincp/books?success=delete");
-  exit();
-}
-
-
-
 // Edit User
 if (isset($_POST['edit-user'])) {
   // Filter input
@@ -756,6 +741,9 @@ if (isset($_POST['order-now'])) {
     $orderID = $check->preparedQuery("INSERT INTO orders (user_id,resale_book,address_id,qty,products,total_price,status,created_at)
                   VALUES (?,?,?,?,?,?,?,?)",array($_SESSION['UserID'],$_SESSION["bookID"],$_SESSION['AddressID'],1,'[]',$arr['total_price'],'pending',date("Y-m-d H:i:s")), 'insert');
 
+    // Update price
+      $check->preparedQuery("UPDATE books SET price=? WHERE id=?",array($arr['total_price'],$_SESSION["bookID"]));
+
    // Insert in shipment
    $check->preparedQuery("INSERT INTO shipment (order_id,address_id,status,created_at)
      VALUES (?,?,?,?)",array($orderID,$_SESSION['AddressID'],'pending',date("Y-m-d H:i:s")));
@@ -771,7 +759,6 @@ if (isset($_POST['order-now'])) {
     $products = array();
     foreach ($_SESSION["shopping_cart"] as $key => $value)
       $products[] = $_SESSION["shopping_cart"][$key]['product_id'];
-
 
     // Insert in orders
     $orderID = $check->preparedQuery("INSERT INTO orders (user_id,resale_book,address_id,qty,products,total_price,status,created_at)
@@ -806,7 +793,7 @@ if (isset($_POST['order-now'])) {
 
 
 
-// Resale new book
+// Add book to resale
 if (isset($_POST['resale-new'])) {
   // Filter input
   $arr = $check->xss_clean_arr(array('isbn','title','cover','category','author','publisher','released','status','price','description'),'post');
@@ -851,7 +838,7 @@ if (isset($_POST['resale-new'])) {
 
 
 
-// Resale old book
+// select book to resale
 if (isset($_POST['resale-old'])) {
   // Filter input
   $arr = $check->xss_clean_arr(array('isbn','status','price'),'post');
@@ -904,8 +891,8 @@ if (isset($_GET['order'])) {
     if($arr['order'] == 'approval'){
       $check->preparedQuery("UPDATE orders SET status='approved' WHERE id=?",array($arr['id']));
 
-      if($order['resale_book'] > 0){
-        $check->preparedQuery("UPDATE books SET status='receiving' WHERE id=?",array($order['resale_book']));
+      if($order['resale_book'] !== 0){
+        $check->preparedQuery("UPDATE books SET status='approval' WHERE id=?",array($order['resale_book']));
         $page = "Location: /admincp/resale?success=status";
       }else{
         $page = "Location: /admincp/orders?success=status";
@@ -924,14 +911,7 @@ if (isset($_GET['order'])) {
       $check->preparedQuery("UPDATE shipment SET status='received' WHERE order_id=?",array($arr['id']));
 
       if($order['resale_book'] > 0){
-        $bookQTY = $check->preparedQuery("SELECT qty FROM books WHERE id=?",array($order['resale_book']),'select_row')['qty'];
-        $qty = intval($bookQTY) - 1;
-        $check->preparedQuery("UPDATE books SET status='enable',qty=? WHERE id=?",array($qty,$order['resale_book']));
-
-        $bookQTY = $check->preparedQuery("SELECT qty FROM books WHERE id=?",array($order['resale_book']),'select_row')['qty'];
-        if($bookQTY == 0)
-          $check->preparedQuery("UPDATE books SET status='disabled' WHERE id=?",array($order['resale_book']));
-
+        $check->preparedQuery("UPDATE books SET status='enable' WHERE id=?",array($order['resale_book']));
         $page = "Location: /admincp/resale?success=status";
 
       }else{
@@ -942,12 +922,25 @@ if (isset($_GET['order'])) {
 
           $bookQTY = $check->preparedQuery("SELECT qty FROM books WHERE id=?",array($value),'select_row')['qty'];
           if($bookQTY == 0)
-            $check->preparedQuery("UPDATE books SET status='disabled' WHERE id=?",array($value));
+            $check->preparedQuery("UPDATE books SET status='sold' WHERE id=?",array($value));
         }
 
         $page = "Location: /admincp/orders?success=status";
 
       }
+
+    }elseif($arr['order'] == 'sold'){
+
+      $check->preparedQuery("UPDATE shipment SET status='sold' WHERE order_id=?",array($arr['id']));
+      $check->preparedQuery("UPDATE books SET status='sold' WHERE id=?",array($order['resale_book']));
+      $page = "Location: /admincp/resale?success=status";
+
+    }elseif($arr['order'] == 'send-amount'){
+
+      // Insert in payment
+      $check->preparedQuery("INSERT INTO payment (order_id,user_id,code,status,created_at)
+         VALUES (?,?,?,?,?)",array($arr['id'],$_SESSION['UserID'],rand(1000000,9999999),'paid',date("Y-m-d H:i:s")));
+      $page = "Location: /admincp/resale?success=status";
 
     }elseif($arr['order'] == 'rejection'){
       $check->preparedQuery("UPDATE orders SET status='rejection' WHERE order_id=?",array($arr['id']));
