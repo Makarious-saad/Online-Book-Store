@@ -60,22 +60,20 @@
                                   while ($row = $result->fetch_array()){
                                     $products = NULL;
                                     $paymentCode = '-';
-                                    $paymentStatus = '-';
                                     $address = $systemData->preparedQuery("SELECT * FROM addresses WHERE id=?",array($row['address_id']),'select_row');
                                     $area = $systemData->preparedQuery("SELECT * FROM areas WHERE id=?",array($address['area_id']),'select_row');
                                     $city = $systemData->preparedQuery("SELECT name FROM cities WHERE id=?",array($area['city_id']),'select_row')['name'];
                                     $shipment = $systemData->preparedQuery("SELECT status FROM shipment WHERE order_id=?",array($row['id']),'select_row')['status'];
 
-                                    if($row['products'] !== '[]'){
-                                      $payment= $systemData->preparedQuery("SELECT * FROM payment WHERE order_id=? AND user_id=?",array($row['id'],$_SESSION['UserID']),'select_row');
-                                      $paymentCode = '#'.$payment['code'];
-                                      $paymentStatus = ucfirst($payment['status']);
-                                      foreach (json_decode($row['products'], true) as $key => $value) {
-                                        $book = $systemData->preparedQuery("SELECT title FROM books WHERE id=? ",array($value),'select_row')['title'];
-                                        $products .= '<a href="/book&bookid='.$value.'" target="_blank">'.$book.'</a> <br>';
-                                      }
-                                      $products = mb_substr($products, 0, -4);
-                                    }  ?>
+
+                                    $payment= $systemData->preparedQuery("SELECT * FROM payment WHERE order_id=?",array($row['id']),'select_row');
+                                    $paymentCode = '#'.$payment['code'];
+                                    $paymentStatus = ucfirst($payment['status']);
+                                    foreach (json_decode($row['products'], true) as $key => $value) {
+                                      $book = $systemData->preparedQuery("SELECT title FROM books WHERE id=? ",array($value),'select_row')['title'];
+                                      $products .= '<a href="/book&bookid='.$value.'" target="_blank">'.$book.'</a> <br>';
+                                    }
+                                    $products = mb_substr($products, 0, -4);  ?>
 
                                     <tr>
                                         <td class="align-middle text-center"><?php echo $products; ?></td>

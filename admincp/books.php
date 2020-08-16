@@ -17,8 +17,6 @@
         $systemData->swal('Good','The book has been added successfully','success');
       }elseif(@$_GET['success'] == 'update'){
         $systemData->swal('Good','The book was successfully updated','success');
-      }elseif(@$_GET['success'] == 'delete'){
-        $systemData->swal('Good','The book has been deleted successfully','success');
       } ?>
 
 
@@ -63,7 +61,6 @@
                                         <th class="text-center">User</th>
                                         <th class="text-center">Date added</th>
                                         <th class="text-center">Edit Book</th>
-                                        <th class="text-center">Delete Book</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -84,7 +81,6 @@
                                         <td class="text-center"><?php echo $user; ?></td>
                                         <td class="text-center"><?php echo $row['created_at']; ?></td>
                                         <td class="text-center"><a class="btn btn-success" role="button" href="edit-book?id=<?php echo $row['id']; ?>">Edit</a></td>
-                                        <td class="text-center"><a class="btn btn-danger" role="button" href="../include/check.php?book=<?php echo $row['id']; ?>">Delete</a></td>
                                     </tr>
 
                             <?php } ?>

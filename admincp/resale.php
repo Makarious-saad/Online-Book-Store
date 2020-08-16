@@ -59,15 +59,26 @@
                             <?php $result = $systemData->preparedQuery("SELECT * FROM orders WHERE resale_book > 0 ORDER BY id DESC");
                                   while ($row = $result->fetch_array()){
                                     $paymentCode = '-';
-                                    $paymentStatus = '-';
+
+                                    $book = $systemData->preparedQuery("SELECT * FROM books WHERE id=?",array($row['resale_book']),'select_row');
+
+                                    if($book['status'] == 'sold'){
+                                      $payment = $systemData->preparedQuery("SELECT status FROM payment WHERE order_id=?",array($row['id']),'select_row')['status'];
+                                      if($payment == NULL){
+                                        $paymentStatus = '<a class="btn btn-success" role="button" href="../include/check.php?order=send-amount&id='.$row['id'].'">Send Amount</a>';
+                                      }else{
+                                        $paymentStatus = 'Amount sent';
+                                      }
+                                    }else{
+                                      $paymentStatus = '-';
+                                    }
                                     $address = $systemData->preparedQuery("SELECT * FROM addresses WHERE id=?",array($row['address_id']),'select_row');
                                     $area = $systemData->preparedQuery("SELECT * FROM areas WHERE id=?",array($address['area_id']),'select_row');
                                     $city = $systemData->preparedQuery("SELECT name FROM cities WHERE id=?",array($area['city_id']),'select_row')['name'];
-                                    $shipment = $systemData->preparedQuery("SELECT status FROM shipment WHERE order_id=?",array($row['id']),'select_row')['status'];
-                                    $isbn = $systemData->preparedQuery("SELECT isbn FROM books WHERE id=?",array($row['resale_book']),'select_row')['isbn']; ?>
+                                    $shipment = $systemData->preparedQuery("SELECT status FROM shipment WHERE order_id=?",array($row['id']),'select_row')['status']; ?>
 
                                     <tr>
-                                        <td class="align-middle text-center"><?php echo '#'.$isbn; ?></td>
+                                        <td class="align-middle text-center"><?php echo '#'.$book['isbn']; ?></td>
                                         <td class="align-middle text-center"><?php echo $row['total_price'].' EGP'; ?></td>
                                         <td class="align-middle text-center"><?php echo $address['street_st']. ' - '.$area['name'].' - '.$city; ?></td>
                                         <td class="align-middle text-center text-primary"><?php echo $paymentStatus; ?></td>

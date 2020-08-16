@@ -6,15 +6,6 @@
   <?php include('head.php'); ?>
 </head>
 
-<?php // Notifications
-      if(@$_GET['error'] == 'add'){
-        $systemData->swal('Error!','The user has not been added','error');
-      }elseif(@$_GET['error'] == 'update'){
-        $systemData->swal('Error!','The user has not been updated','error');
-      }elseif(@$_GET['success'] == 'update'){
-        $systemData->swal('Good','The user was successfully updated','success');
-      } ?>
-
 <body id="page-top">
   <div id="wrapper">
     <?php include('navbar.php'); ?>
@@ -51,7 +42,6 @@
                                         <th class="text-center">Email</th>
                                         <th class="text-center">Phone</th>
                                         <th class="text-center">Type</th>
-                                        <th class="text-center">Edit User</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -66,7 +56,6 @@
                                         <td class="text-center"><?php echo $row['email']; ?></td>
                                         <td class="text-center"><?php echo $row['phone']; ?></td>
                                         <td class="text-center"><?php echo $row['type']; ?></td>
-                                        <td class="text-center"><a class="btn btn-success" role="button" href="edit-user?id=<?php echo $row['id']; ?>">Edit</a></td>
                                     </tr>
 
                             <?php } ?>
