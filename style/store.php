@@ -28,7 +28,9 @@
                 $publisher = $this->preparedQuery("SELECT name FROM publishers WHERE id=?",array($row['publisher_id']),'select_row')['name'];
                 $user = $this->preparedQuery("SELECT first_name FROM users WHERE id=?",array($row['user_id']),'select_row')['first_name'];
 
-                if($row['status'] == 'enable'){
+                if($row['status'] == 'approval'){
+                  $bookStatus = 'Approval';
+                }elseif($row['status'] == 'enable'){
                   $bookStatus = 'For Sale';
                 }elseif($row['status'] == 'pending'){
                   $bookStatus = 'Reviewing';
@@ -36,7 +38,9 @@
                   $bookStatus = 'Receiving';
                 }elseif($row['status'] == 'disabled'){
                   $bookStatus = 'Sold';
-                }   ?>
+                }elseif($row['status'] == 'rejection'){
+                  $bookStatus = 'Rejection';
+                }    ?>
 
                  <tr>
                    <td class="text-center">#<?php echo $row['id']; ?></td>

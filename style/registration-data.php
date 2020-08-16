@@ -39,7 +39,11 @@
               <option value="buyer" selected>Buyer</option>
               <option value="seller">Seller</option>
             </select>
-
+          </div>
+          <div style="margin-bottom: 2%;">
+            <label class="txtwhite">
+              <input type="checkbox" name="" required> I agree with the <a href="/terms" style="color:yellow" target="_blank">Terms and Conditions</a>.
+            </label>
           </div>
             <input type="submit" value="Complete Registeration" name="newUser" class="btn btn-outline-light" name="">
           </div>

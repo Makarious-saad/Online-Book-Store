@@ -1,5 +1,7 @@
 <?php echo $this->header();
-      $_SESSION['QTY'] = 0; ?>
+      $user = $this->preparedQuery("SELECT * FROM users WHERE email=?",array($_SESSION['login']),'select_row');
+      $_SESSION['QTY'] = 0;
+      $commission = 0; ?>
 
 <br><br><br><br><br><br>
 <div class="row justify-content-center">
@@ -39,16 +41,26 @@
                  <td align="right"><?php echo $_SESSION['ShippingFee']; ?></td>
                  <td align="right"><?php echo number_format($_SESSION['ShippingFee'], 2); ?></td>
                 </tr>
+
               </tbody>
+              
                 <tr>
-                 <td colspan="3" align="right">Total</td>
-                 <td align="right"><?php echo number_format($total_price + $_SESSION['ShippingFee'], 2); ?></td>
+                  <?php if($user['type'] == 'seller'){
+                          $commission = (5 * intval($total_price + $_SESSION['ShippingFee']) / 100); ?>
+                 <td colspan="3" align="right">Commission value - 5% <br> Total</td>
+                 <td align="right"><?php echo number_format($commission, 2); ?> <br>
+                                   <?php echo number_format($total_price + $_SESSION['ShippingFee'] + $commission, 2); ?></td>
+                    <?php  }else{ ?>
+                      <td colspan="3" align="right">Total</td>
+                      <td align="right"><?php echo number_format($total_price + $_SESSION['ShippingFee'] + $commission, 2); ?></td>
+
+                    <?php  } ?>
                 </tr>
 
                 <tfoot>
                   <tr>
                    <td colspan="5" align="center">
-                     <input type="hidden" name="total_price" value="<?php echo $total_price + $_SESSION['ShippingFee']; ?>">
+                     <input type="hidden" name="total_price" value="<?php echo $total_price + $_SESSION['ShippingFee'] + $commission; ?>">
                      <input type="hidden" name="qty" value="<?php echo $_SESSION['QTY']; ?>">
                      <button type="submit" name="order-now" class="btn btn-success btn-xs">Order Now</button>
                    </td>
